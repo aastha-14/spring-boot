@@ -14,6 +14,7 @@ public class DemoRestController {
 //    3.2 define a constructor for dependency injection using @Autowired
     @Autowired
     public DemoRestController(Coach theCoach){
+        System.out.println("In class " + getClass().getSimpleName());
         myCoach = theCoach;
     }
     @GetMapping("/dailyworkout")
