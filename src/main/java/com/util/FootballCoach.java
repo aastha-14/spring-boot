@@ -1,9 +1,10 @@
-package com.aastha.firstApp;
+package com.util;
 
+import com.aastha.firstApp.Coach;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FootballCoach implements Coach{
+public class FootballCoach implements Coach {
     public FootballCoach(){
         System.out.println("In class " + getClass().getSimpleName());
     }

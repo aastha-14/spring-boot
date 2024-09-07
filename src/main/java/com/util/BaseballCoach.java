@@ -1,5 +1,6 @@
-package com.aastha.firstApp;
+package com.util;
 
+import com.aastha.firstApp.Coach;
 import org.springframework.stereotype.Component;
 
 // marks component as spring bean and makes it available for dependency injection

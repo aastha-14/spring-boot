@@ -1,7 +1,8 @@
-package com.aastha.firstApp;
+package com.util;
 
 // Step 2 - create class that implements the interface
 
+import com.aastha.firstApp.Coach;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Component;
