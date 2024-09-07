@@ -9,6 +9,6 @@ public class CricketCoach  implements Coach {
     // it is mandatory to override all items defined in interface
     @Override
     public String getDailyWorkout(){
-        return "practice for 20 mins";
+        return "practice for 20 minutes";
     }
 }

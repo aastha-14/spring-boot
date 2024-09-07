@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoRestController {
 //    3.1 Define a private field for dependency
     private Coach myCoach;
-//    3.2 define a constructor for dependency injection using @Autowired
+//    3.2 define a setter for dependency injection using @Autowired
     @Autowired
-    public DemoRestController(Coach myCoach){
-        this.myCoach = myCoach;
+    public void setMyCoach(Coach theCoach){
+        myCoach = theCoach;
     }
     @GetMapping("/dailyworkout")
     public String getDailyWorkout(){
