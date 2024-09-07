@@ -1,9 +1,7 @@
 package com.aastha.firstApp;
 
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-@Lazy
 @Component
 public class FootballCoach implements Coach{
     public FootballCoach(){
