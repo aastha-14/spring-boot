@@ -1,7 +1,8 @@
-package com.aastha.firstApp;
+package com.aastha.firstApp.rest;
 
 // Step 3: create RestController
 
+import com.aastha.firstApp.Coach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;

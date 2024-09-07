@@ -1,4 +1,4 @@
-package com.util;
+package com.aastha.firstApp.common;
 
 // Step 2 - create class that implements the interface
 

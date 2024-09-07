@@ -1,4 +1,4 @@
-package com.util;
+package com.aastha.firstApp.common;
 
 import com.aastha.firstApp.Coach;
 
