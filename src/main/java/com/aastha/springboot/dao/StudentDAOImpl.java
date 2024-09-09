@@ -24,4 +24,10 @@ public class StudentDAOImpl implements StudentDAO{
         List<Student> students = result.getResultList();
         return students;
     }
+    public Student findOne(Integer studentId){
+//        create typed query
+        Student result = entityManager.find(Student.class, studentId);
+//        return list
+        return result;
+    }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface StudentDAO {
     List<Student> findAll();
+   Student findOne(Integer studentId);
 }

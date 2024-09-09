@@ -20,7 +20,8 @@ public class SpringbootApplication {
 public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 //		Java Lambda Expression
 		return runner -> {
-			findAllStudents(studentDAO);
+//			findAllStudents(studentDAO);
+			findStudentDetails(studentDAO);
 		};
 }
 private void findAllStudents(StudentDAO studentDAO){
@@ -30,4 +31,9 @@ private void findAllStudents(StudentDAO studentDAO){
 		System.out.println(student);
 	}
 }
+	private void findStudentDetails(StudentDAO studentDAO){
+		System.out.println("Fetching student details...");
+		Student student = studentDAO.findOne(1);
+		System.out.println(student);
+	}
 }
