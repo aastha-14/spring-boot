@@ -1,13 +1,13 @@
-package com.aastha.firstApp;
+package com.aastha.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FirstAppApplication {
+public class SpringbootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FirstAppApplication.class, args);
+		SpringApplication.run(SpringbootApplication.class, args);
 	}
 
 }
