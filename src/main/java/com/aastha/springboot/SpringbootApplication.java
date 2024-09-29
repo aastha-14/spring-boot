@@ -21,7 +21,10 @@ public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 //		Java Lambda Expression
 		return runner -> {
 //			findAllStudents(studentDAO);
-			findStudentDetails(studentDAO);
+//			findStudentDetails(studentDAO);
+//			createStudent(studentDAO);
+			deleteStudent(studentDAO);
+//			updateStudent(studentDAO);
 		};
 }
 private void findAllStudents(StudentDAO studentDAO){
@@ -33,7 +36,28 @@ private void findAllStudents(StudentDAO studentDAO){
 }
 	private void findStudentDetails(StudentDAO studentDAO){
 		System.out.println("Fetching student details...");
-		Student student = studentDAO.findOne(1);
+		Student student = studentDAO.findById(1);
 		System.out.println(student);
+	}
+
+	private void createStudent(StudentDAO studentDAO){
+		System.out.println("Creating student...");
+		Student newStudent = new Student("New", "Student", "newstudent@gmail.com");
+		studentDAO.save(newStudent);
+		System.out.println("Student Created...");
+	}
+	private void updateStudent(StudentDAO studentDAO){
+		System.out.println("Updating student...");
+		Student newStudent = new Student("Jane", "Smith", "newstudent@gmail.com");
+		newStudent.setId(6);
+		Student student = studentDAO.update(newStudent);
+		System.out.println("Student Updated..." + student);
+		findAllStudents(studentDAO);
+	}
+	private void deleteStudent(StudentDAO studentDAO){
+		System.out.println("Deleting student...");
+		int id = studentDAO.deleteById(1);
+		System.out.println("Deleted student..." + id);
+		findAllStudents(studentDAO);
 	}
 }
