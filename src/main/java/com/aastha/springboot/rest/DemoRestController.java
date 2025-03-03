@@ -49,4 +49,18 @@ public class DemoRestController {
         // return ResponseEntity
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    // add another exception handler - to catch any exception (catch all)
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(Exception exc){
+        // create a student error response
+        StudentErrorResponse error = new StudentErrorResponse();
+
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setMessage(exc.getMessage()); // this can be customized to your message
+        error.setTimeStamp(System.currentTimeMillis());
+
+        // return ResponseEntity
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }
