@@ -4,50 +4,70 @@ import com.aastha.springboot.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-// entity manager dependency injection
-@Component
-public class StudentDAOImpl implements StudentDAO{
-//    define private field for dependency
+@Repository
+public class StudentDAOImpl implements StudentDAO {
+    // 1. define field for entity manager
     private EntityManager entityManager;
-//    define constructor for injection
-    public StudentDAOImpl(EntityManager theEntityManager){
-        entityManager = theEntityManager;
+
+    // 2. inject entity manager using constructor injection
+    @Autowired
+    public StudentDAOImpl(EntityManager entityManager){
+        this.entityManager = entityManager;
     }
 
+    // 3. implement save method
+    @Override
+    @Transactional // Required for update operation
+    public void save(Student theStudent){
+        entityManager.persist(theStudent);
+    }
+
+    @Override
+    public Student getStudentById(Integer id) {
+        return entityManager.find(Student.class, id);
+    }
+
+    @Override
     public List<Student> findAll(){
-    //        create typed query
-        TypedQuery<Student> result = entityManager.createQuery("FROM Student", Student.class);
-    //        return list
-        return result.getResultList();
+        // create query
+        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student order by firstName desc", Student.class);
+        // return query result
+        return theQuery.getResultList();
     }
-    public Student findById(Integer studentId){
-        //        create typed query
-        //        return list
-        return entityManager.find(Student.class, studentId);
+
+    @Override
+    public List<Student> searchStudent(String lastName){
+        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student WHERE lastName=:theName", Student.class);
+        // set query params
+        theQuery.setParameter("theName", lastName);
+        // return query result
+        return theQuery.getResultList();
     }
 
     @Override
     @Transactional
-    public void save(Student theStudent) {
-        theStudent.setId(0); // this indicates that merge will perform create operation
+    public void updateStudent(Student theStudent) {
+        // create Query
         entityManager.merge(theStudent);
+        return;
     }
 
     @Override
     @Transactional
-    public Student update(Student theStudent) {
-        return entityManager.merge(theStudent);
+    public void deleteStudent(Integer id){
+        Student theStudent = getStudentById(id);
+        entityManager.remove(theStudent);
+        return;
     }
 
     @Override
     @Transactional
-    public int deleteById(int id) {
-        Student student = findById(id);
-        entityManager.remove(student);
-        return id;
+    public int deleteAll(){
+        return entityManager.createQuery("DELETE FROM Student").executeUpdate();
     }
 }

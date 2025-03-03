@@ -5,12 +5,12 @@ import com.aastha.springboot.entity.Student;
 import java.util.List;
 
 public interface StudentDAO {
+    void save(Student theStudent);
+    Student getStudentById(Integer id);
     List<Student> findAll();
-   Student findById(Integer studentId);
+    List<Student> searchStudent(String lastName);
+    void updateStudent(Student theStudent);
 
-   void save(Student theStudent);
-
-   Student update(Student theStudent);
-
-   int deleteById(int id);
+    void deleteStudent(Integer id);
+    int deleteAll();
 }

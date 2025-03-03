@@ -15,49 +15,76 @@ public class SpringbootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootApplication.class, args);
 	}
-//	this CommandLineRunner will run after all other beans are finished
 	@Bean
-public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
-//		Java Lambda Expression
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
-//			findAllStudents(studentDAO);
-//			findStudentDetails(studentDAO);
-//			createStudent(studentDAO);
-			deleteStudent(studentDAO);
-//			updateStudent(studentDAO);
-		};
-}
-private void findAllStudents(StudentDAO studentDAO){
-	System.out.println("Fetching all students...");
-	List<Student> students = studentDAO.findAll();
-	for(Student student:students){
-		System.out.println(student);
-	}
-}
-	private void findStudentDetails(StudentDAO studentDAO){
-		System.out.println("Fetching student details...");
-		Student student = studentDAO.findById(1);
-		System.out.println(student);
-	}
+			System.out.println("Hello world!");
+			//	createStudent(studentDAO);
+			//	getStudents(studentDAO);
+			//	getAllStudents(studentDAO);
+			//	searchStudentByLastName(studentDAO);
 
+			//	updateStudent(studentDAO);
+
+			//	deleteStudent(studentDAO);
+			deleteAllStudents(studentDAO);
+		};
+
+
+	}
 	private void createStudent(StudentDAO studentDAO){
-		System.out.println("Creating student...");
-		Student newStudent = new Student("New", "Student", "newstudent@gmail.com");
-		studentDAO.save(newStudent);
-		System.out.println("Student Created...");
+		// 1. Create Student object
+		System.out.println("Creating new student object...");
+		Student tempStudent = new Student("John", "Doe", "johnDoe@gmail.com");
+		// 2. save the student object
+		System.out.println("Saving student...");
+		studentDAO.save(tempStudent);
+		// 3. Display ID of the student object
+		System.out.println("Saved Student. Generate ID: " + tempStudent.getId());
+	}
+	private void getStudents(StudentDAO studentDAO){
+
+		Student student = studentDAO.getStudentById(1);
+		System.out.println(student);
+	}
+	private void getAllStudents(StudentDAO studentDAO){
+
+		List<Student> students = studentDAO.findAll();
+		for (Student tempStudent: students){
+			System.out.println(tempStudent);
+		}
+	}
+	private void searchStudentByLastName(StudentDAO studentDAO){
+		List<Student> students = studentDAO.searchStudent("Doe");
+		for(Student tempStudent: students){
+			System.out.println(tempStudent);
+		}
 	}
 	private void updateStudent(StudentDAO studentDAO){
+		// find student by id
+		Student theStudent = studentDAO.getStudentById(1);
+		System.out.println("Retrieved Student by ID" + theStudent);
+		// change first name
 		System.out.println("Updating student...");
-		Student newStudent = new Student("Jane", "Smith", "newstudent@gmail.com");
-		newStudent.setId(6);
-		Student student = studentDAO.update(newStudent);
-		System.out.println("Student Updated..." + student);
-		findAllStudents(studentDAO);
+		theStudent.setFirstName("Aasthaaaa");
+		// update
+		studentDAO.updateStudent(theStudent);
+		System.out.println("Student Updated...");
+		getAllStudents(studentDAO);
 	}
+
 	private void deleteStudent(StudentDAO studentDAO){
-		System.out.println("Deleting student...");
-		int id = studentDAO.deleteById(1);
-		System.out.println("Deleted student..." + id);
-		findAllStudents(studentDAO);
+		System.out.println("Deleting Student..");
+		studentDAO.deleteStudent(3);
+		System.out.println("Student Deleted...");
+
+		System.out.println("Fetching all students...");
+		getAllStudents(studentDAO);
+	}
+
+	private void deleteAllStudents(StudentDAO studentDAO){
+		System.out.println("Deleting ALL Students...");
+		int rowsDeleted = studentDAO.deleteAll();
+		System.out.println("Total rows deleted: " + rowsDeleted);
 	}
 }
